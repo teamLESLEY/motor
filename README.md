@@ -3,8 +3,15 @@ See [`src/main.cpp`](src/main.cpp) for usage examples. To install,
 copy [`include/motor.hpp`](include/motor.hpp) and
 [`src/motor.cpp`](src/motor.cpp) to the project.
 
+## Table of Contents
+- [API Reference](#api-reference)
+  - [class Motor::**DCMotor**](#class-motordcmotor)
+    - [Constructors](#constructors)
+    - [Public member functions](#public-member-functions)
+  - [enum class Motor::**Direction**](#enum-class-motordirection)
+
 ## API Reference
-### class Motor::**DCMotor**
+### class Motor::DCMotor
 Class for controlling a DC Motor attached to an H-bridge via
 PWM. Speed and direction of the motor are controlled
 independently. The output is always updated immediately.
@@ -21,7 +28,7 @@ are set to output mode and PWM is started immediately.
 ##### double `getSpeed`()
 Return the speed of the motor as a percentage of full speed, where 0
 represents stopped and 100 is full speed. To get the current PWM
-level, use Motor::DCMotor::getPWMOutput()
+level, use [Motor::DCMotor::getPWMOutput()](#unsigned-int-getpwmoutput).
 
 ##### Motor::Direction `getDirection`()
 Return the current direction of the motor. Note that if the speed is
@@ -45,8 +52,9 @@ is outside the range 0-100, nothing happens.
 ##### void `setDirection`(Motor::Direction dir)
 - **dir**: the new direction
 
-Set the direction of the motor. Use Motor::Direction::Stop to stop
-the motor.
+Set the direction of the motor. Use
+[Motor::Direction::Stop](#enum-class-motordirection) to stop the
+motor.
 
 ##### void `setSpeedAndDirection`(double speed, Motor::Direction dir)
 - **speed**: a percentage from 0 to 100
@@ -70,4 +78,4 @@ Value | Meaning
 ------|--------
 Forward | The motor turns forward
 Reverse | The motor turns in the reverse direction
-Stop | The motor is stopped
+Stop | The motor is stopped, regardless of speed
