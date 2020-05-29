@@ -49,6 +49,14 @@ void DCMotor::stop() {
   setDirection(Direction::Stop);
 }
 
+void DCMotor::switchDirection() {
+  if (direction == Direction::Forward) {
+    direction = Direction::Reverse;
+  } else if (direction == Direction::Reverse) {
+    direction = Direction::Forward;
+  }
+}
+
 void DCMotor::setSpeed(double speed) {
   if (0 <= speed && speed <= 100) {
     pwmOutput = speed / 100 * PWM_MAX;
@@ -64,14 +72,6 @@ void DCMotor::setDirection(Direction dir) {
 void DCMotor::setSpeedAndDirection(double speed, Direction dir) {
   setSpeed(speed);
   setDirection(dir);
-}
-
-void DCMotor::switchDirection() {
-  if (direction == Direction::Forward) {
-    direction = Direction::Reverse;
-  } else if (direction == Direction::Reverse) {
-    direction = Direction::Forward;
-  }
 }
 
 unsigned int DCMotor::getPWMOutput() {

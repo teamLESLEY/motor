@@ -27,11 +27,11 @@ namespace Motor {
     void forward();
     void reverse();
     void stop();
+    void switchDirection();
 
     void setSpeed(double speed);
     void setDirection(Direction dir);
     void setSpeedAndDirection(double speed, Direction dir);
-    void switchDirection();
 
     unsigned int getPWMOutput();
     void setPWMOutput(unsigned int dutyCycle);
