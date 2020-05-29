@@ -11,13 +11,11 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define MOTOR_FORWARD PA_2
 #define MOTOR_REVERSE PA_3
 #define SPEED_IN PB1
-Motor::DCMotor m(MOTOR_FORWARD, MOTOR_REVERSE);
+Motor::DCMotor motor(MOTOR_FORWARD, MOTOR_REVERSE);
 
 #define PWMFREQ 2000
 
 void setup() {
-  pinMode(MOTOR_FORWARD, OUTPUT);
-  pinMode(MOTOR_REVERSE, OUTPUT);
   pinMode(SPEED_IN, INPUT);
 
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -30,20 +28,18 @@ void setup() {
 
 void loop() {
   int speed = analogRead(SPEED_IN);
-  int forward = speed > 512 ? (speed - 512) * 2 : 0;
-  int reverse = speed <= 512 ? (512 - speed) * 2 : 0;
-  pwm_start(MOTOR_FORWARD, PWMFREQ, forward, RESOLUTION_10B_COMPARE_FORMAT);
-  pwm_start(MOTOR_REVERSE, PWMFREQ, reverse, RESOLUTION_10B_COMPARE_FORMAT);
+  if (speed > 512) {
+    motor.setSpeed((speed - 512) / 512.0 * 100);
+    motor.setDirection(Motor::Direction::Forward);
+  } else {
+    motor.setSpeed((512 - speed) / 512.0 * 100);
+    motor.setDirection(Motor::Direction::Reverse);
+  }
 
   display.clearDisplay();
   display.setCursor(0, 0);
-  if (forward != 0) {
-    display.printf("Speed: %d\n", forward);
-    display.printf("Dir: f\n");
-  } else {
-    display.printf("Speed: %d\n", reverse);
-    display.printf("Dir: b\n");
-  }
+  display.printf("Speed: %d\n", (int) motor.getSpeed());
+  display.printf("Dir: %c\n", motor.getDirection() == Motor::Direction::Forward ? 'f' : 'b');
   display.display();
   delay(100);
 }
