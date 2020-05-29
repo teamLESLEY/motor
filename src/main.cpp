@@ -1,6 +1,8 @@
 #include <Wire.h>
 #include <Adafruit_SSD1306.h>
 
+#include "motor.hpp"
+
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
@@ -9,6 +11,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define MOTOR_FORWARD PA_2
 #define MOTOR_REVERSE PA_3
 #define SPEED_IN PB1
+Motor::DCMotor m(MOTOR_FORWARD, MOTOR_REVERSE);
 
 #define PWMFREQ 2000
 
