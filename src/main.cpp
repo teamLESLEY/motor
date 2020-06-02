@@ -29,10 +29,10 @@ void setup() {
 void loop() {
   int speed = analogRead(SPEED_IN);
   if (speed > 512) {
-    motor.setSpeed((speed - 512) / 512.0 * 100);
+    motor.setSpeed((speed - 512) / 512.0);
     motor.setDirection(Motor::Direction::Forward);
   } else {
-    motor.setSpeed((512 - speed) / 512.0 * 100);
+    motor.setSpeed((512 - speed) / 512.0);
     motor.setDirection(Motor::Direction::Reverse);
   }
 

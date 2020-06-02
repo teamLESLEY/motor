@@ -27,7 +27,7 @@ are set to output mode and PWM is started immediately.
 #### Public member functions
 ##### double `getSpeed`()
 Return the speed of the motor as a percentage of full speed, where 0
-represents stopped and 100 is full speed. To get the current PWM
+represents stopped and 1 is full speed. To get the current PWM
 level, use [Motor::DCMotor::getPWMOutput()](#unsigned-int-getpwmoutput).
 
 ##### Motor::Direction `getDirection`()
@@ -44,10 +44,10 @@ Reverse the direction of the motor from forward to reverse or vice
 versa. If the motor is stopped, nothing changes.
 
 ##### void `setSpeed`(double speed)
-- **speed**: a percentage from 0 to 100
+- **speed**: a percentage from 0 to 1
 
 Set the speed as a percentage of full speed. If the new speed
-is outside the range 0-100, nothing happens.
+is outside the range 0-1, nothing happens.
 
 ##### void `setDirection`(Motor::Direction dir)
 - **dir**: the new direction
@@ -57,11 +57,11 @@ Set the direction of the motor. Use
 motor.
 
 ##### void `setSpeedAndDirection`(double speed, Motor::Direction dir)
-- **speed**: a percentage from 0 to 100
+- **speed**: a percentage from 0 to 1
 - **dir**: the new direction
 
 Set both the speed and direction in one function call. If the speed
-is outside the range 0-100, the speed is unchanged but the direction
+is outside the range 0-1, the speed is unchanged but the direction
 will still be set.
 
 ##### unsigned int `getPWMOutput`()

@@ -29,7 +29,7 @@ void DCMotor::updatePWM() {
 }
 
 double DCMotor::getSpeed() {
-  return (double) pwmOutput / PWM_MAX * 100;
+  return (double) pwmOutput / PWM_MAX;
 }
 
 Direction DCMotor::getDirection() {
@@ -58,8 +58,8 @@ void DCMotor::switchDirection() {
 }
 
 void DCMotor::setSpeed(double speed) {
-  if (0 <= speed && speed <= 100) {
-    pwmOutput = speed / 100 * PWM_MAX;
+  if (0 <= speed && speed <= 1) {
+    pwmOutput = speed * PWM_MAX;
     updatePWM();
   }
 }
