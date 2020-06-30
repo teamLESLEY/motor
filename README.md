@@ -17,9 +17,13 @@ PWM. Speed and direction of the motor are controlled
 independently. The output is always updated immediately.
 
 #### Constructors
-##### `DCMotor`(PinName forwardPin, PinName reversePin)
+##### `DCMotor`(PinName forwardPin, PinName reversePin, unsigned int minPWMToMove=0)
 - **forwardPin**: PWM-capable pin that turns the motor forward.
 - **reversePin**: PWM-capable pin that turns the motor in reverse.
+- **minPWMToMove**: the minimum PWM value that overcomes forces
+  resisting the motor and starts it turning. If non-zero, speed is
+  remapped so that non-zero speeds range from this value to the
+  maximum PWM output.
 
 On initialization, DC motors are at speed 0 and stopped. The two pins
 are set to output mode and PWM is started immediately.
@@ -44,10 +48,11 @@ Reverse the direction of the motor from forward to reverse or vice
 versa. If the motor is stopped, nothing changes.
 
 ##### void `setSpeed`(double speed)
-- **speed**: a percentage from 0 to 1
+- **speed**: a percentage from -1 to 1
 
 Set the speed as a percentage of full speed. If the new speed
-is outside the range 0-1, nothing happens.
+is outside the range -1 to 1, nothing happens. Positive speeds turn
+the motor forwards, negative speeds turn it in reverse.
 
 ##### void `setDirection`(Motor::Direction dir)
 - **dir**: the new direction
@@ -57,12 +62,12 @@ Set the direction of the motor. Use
 motor.
 
 ##### void `setSpeedAndDirection`(double speed, Motor::Direction dir)
-- **speed**: a percentage from 0 to 1
+- **speed**: a percentage from -1 to 1
 - **dir**: the new direction
 
 Set both the speed and direction in one function call. If the speed
-is outside the range 0-1, the speed is unchanged but the direction
-will still be set.
+is outside the range -1 to 1, the speed is unchanged but the direction
+will still be set. Set [Motor::DCMotor::setSpeed()](#void-setspeed)
 
 ##### unsigned int `getPWMOutput`()
 Get the current PWM duty cycle.

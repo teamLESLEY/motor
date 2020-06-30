@@ -38,7 +38,7 @@ void loop() {
 
   display.clearDisplay();
   display.setCursor(0, 0);
-  display.printf("Speed: %d\n", (int) motor.getSpeed());
+  display.printf("Speed: %d\n", (int) (motor.getSpeed() * 100));
   display.printf("Dir: %c\n", motor.getDirection() == Motor::Direction::Forward ? 'f' : 'b');
   display.display();
   delay(100);
