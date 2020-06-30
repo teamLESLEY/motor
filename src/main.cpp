@@ -8,10 +8,10 @@
 #define OLED_RESET -1
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-#define MOTOR_FORWARD PA_2
-#define MOTOR_REVERSE PA_3
-#define SPEED_IN PB1
-Motor::DCMotor motor(MOTOR_FORWARD, MOTOR_REVERSE);
+#define MOTOR_FORWARD PA_1
+#define MOTOR_REVERSE PA_0
+#define SPEED_IN PA4
+Motor::DCMotor motor(MOTOR_FORWARD, MOTOR_REVERSE, 512);
 
 #define PWMFREQ 2000
 
@@ -28,13 +28,7 @@ void setup() {
 
 void loop() {
   int speed = analogRead(SPEED_IN);
-  if (speed > 512) {
-    motor.setSpeed((speed - 512) / 512.0);
-    motor.setDirection(Motor::Direction::Forward);
-  } else {
-    motor.setSpeed((512 - speed) / 512.0);
-    motor.setDirection(Motor::Direction::Reverse);
-  }
+  motor.setSpeed((speed - 512) / 512.0);
 
   display.clearDisplay();
   display.setCursor(0, 0);

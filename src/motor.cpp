@@ -29,7 +29,7 @@ void DCMotor::updatePWM() {
 }
 
 double DCMotor::getSpeed() {
-  return (double) pwmOutput / PWM_MAX;
+  return (double) map(pwmOutput, MOVEMENT_MIN_PWM, 1024, 0, 1024) / PWM_MAX;
 }
 
 Direction DCMotor::getDirection() {
