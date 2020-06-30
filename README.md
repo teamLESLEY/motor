@@ -67,7 +67,7 @@ motor.
 
 Set both the speed and direction in one function call. If the speed
 is outside the range -1 to 1, the speed is unchanged but the direction
-will still be set. Set [Motor::DCMotor::setSpeed()](#void-setspeed)
+will still be set. See [Motor::DCMotor::setSpeed()](#void-setspeeddouble-speed)
 
 ##### unsigned int `getPWMOutput`()
 Get the current PWM duty cycle.
