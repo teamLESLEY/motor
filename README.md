@@ -1,7 +1,7 @@
 # Motor control libraries
-See [`src/main.cpp`](src/main.cpp) for usage examples. To install,
-copy [`include/motor.hpp`](include/motor.hpp) and
-[`src/motor.cpp`](src/motor.cpp) to the project.
+See [`main.cpp`](main.cpp) for usage examples. To install, copy
+[`motor.hpp`](motor.hpp) to `include/` and [`motor.cpp`](motor.cpp) to
+`src/` in the project.
 
 ## Table of Contents
 - [API Reference](#api-reference)
